@@ -164,20 +164,29 @@ You can use this sample against your own FHIR repository (and of course you'll n
 
 A couple of important things to note, if you are using [iris-fhir-template](https://openexchange.intersystems.com/package/iris-fhir-template):
 * Before using the Docker sample you must make a slight change in the repo you clone.
+  
 In the Module.xml, you need to change the InteractionsStrategy value, from 'Json' to 'JsonAdvSQL' (per the comment above).
+
 The line (currently #14; [here](https://github.com/intersystems-community/iris-fhir-template/blob/0336e2aec8e34127188b073ac91cc3428489c1d1/module.xml#L14C1-L15C1)) looks like this:
-'''
+
+'''html
     <Default Name="InteractionsStrategy" Value="Json" />
 '''
+
 So change it by you to this:
-'''
+
+'''html
     <Default Name="InteractionsStrategy" Value="JsonAdvSQL" />
 '''
 
 (I will recommned to @eshvarov to update this as the default, and update here accordingly, but in the meantime you can use this)
+
 And then when you want to start the Container, don't just 'docker compose up -d', rather the first time also build, so: 'docker compose up -d --build'.
 
 * The second thing is that keep in mind that I am using the sample's Resources, but the order these Resources get ingested in the Repository might change from build to build, and the sample refers to specific IDs.
+* 
 For example it assumes the Patient Resource ID with the allergies is 34, and the related AllergyIntolerance IDs are 159, 160, 161.
+
 So before assuming this is the case also by you, I included in the Collection also basic Searchs, for all Patients and all AllergyIntolreances. Use these first, before creating the Lists, verify, and adapt as necessary.
+
 There should be 8 AllergyIntolerance Resources, all belonging to a Patient named Margie619 Hettinger594.
