@@ -1,6 +1,8 @@
 # fhir-lists
 Sample of using FHIR Lists (_list, Functional/Current Lists, and $find)
 
+This repo includes a Postman Collection export of sample FHIR REST API HTTP requests, to demonstrate the use of Lists. See deatils below.
+
 Sometimes it is more convenient, more efficient, and more secure, to limit FHIR Searches per pre-defined "Lists" of Resources.
 
 [Since v2025.1 we support several List-related features](https://docs.intersystems.com/irisforhealthlatest/csp/docbook/DocBook.UI.Page.cls?KEY=HXIHRN_new20251#HXIHRN_new20251_healthinterop) in our FHIR Server.
@@ -155,6 +157,27 @@ Here's an example, per the previous one:
 
 This will return the related $current-allergies list for this Patient, as defined above via the $update-functional function.
 
-See the related Open Exchange app which includes a Postman Collection with the samples above (plus a little more) and instructions re running this against @Evgeny.Shvarov's FHIR server template docker container (indeed the sample above was created around this sample; with a slight change... see details in the app instructions).
-
 A general note - all this functionality assumes you are using the, relatively newer, and current default, JsonAdvSQL [Storage Strategy](https://docs.intersystems.com/healthconnectlatest/csp/docbook/DocBook.UI.Page.cls?KEY=HXFHIRINS_server_install_new#HXFHIRINS_server_install_new_strategy) for your Endpoint. (If relevant see [here regarding migrating from a legacy Strategy](https://docs.intersystems.com/healthconnect20253/csp/docbook/DocBook.UI.Page.cls?KEY=HXFHIRLegacy_SQL))
+
+**Usage Notes**
+You can use this sample against your own FHIR repository (and of course you'll need to refer to your own data/IDs), or if you'd like you can use this sample [iris-fhir-template](https://openexchange.intersystems.com/package/iris-fhir-template) by @eshvarov. Indeed the Postman Collection was tested also with this sample.
+
+A couple of important things to note, if you are using [iris-fhir-template](https://openexchange.intersystems.com/package/iris-fhir-template):
+* Before using the Docker sample you must make a slight change in the repo you clone.
+In the Module.xml, you need to change the InteractionsStrategy value, from 'Json' to 'JsonAdvSQL' (per the comment above).
+The line (currently #14; [here](https://github.com/intersystems-community/iris-fhir-template/blob/0336e2aec8e34127188b073ac91cc3428489c1d1/module.xml#L14C1-L15C1)) looks like this:
+'''
+    <Default Name="InteractionsStrategy" Value="Json" />
+'''
+So change it by you to this:
+'''
+    <Default Name="InteractionsStrategy" Value="JsonAdvSQL" />
+'''
+
+(I will recommned to @eshvarov to update this as the default, and update here accordingly, but in the meantime you can use this)
+And then when you want to start the Container, don't just 'docker compose up -d', rather the first time also build, so: 'docker compose up -d --build'.
+
+* The second thing is that keep in mind that I am using the sample's Resources, but the order these Resources get ingested in the Repository might change from build to build, and the sample refers to specific IDs.
+For example it assumes the Patient Resource ID with the allergies is 34, and the related AllergyIntolerance IDs are 159, 160, 161.
+So before assuming this is the case also by you, I included in the Collection also basic Searchs, for all Patients and all AllergyIntolreances. Use these first, before creating the Lists, verify, and adapt as necessary.
+There should be 8 AllergyIntolerance Resources, all belonging to a Patient named Margie619 Hettinger594.
