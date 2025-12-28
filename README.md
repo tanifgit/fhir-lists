@@ -159,8 +159,9 @@ This will return the related $current-allergies list for this Patient, as define
 
 A general note - all this functionality assumes you are using the, relatively newer, and current default, JsonAdvSQL [Storage Strategy](https://docs.intersystems.com/healthconnectlatest/csp/docbook/DocBook.UI.Page.cls?KEY=HXFHIRINS_server_install_new#HXFHIRINS_server_install_new_strategy) for your Endpoint. (If relevant see [here regarding migrating from a legacy Strategy](https://docs.intersystems.com/healthconnect20253/csp/docbook/DocBook.UI.Page.cls?KEY=HXFHIRLegacy_SQL))
 
-**Usage Notes**
-You can use this sample against your own FHIR repository (and of course you'll need to refer to your own data/IDs), or if you'd like you can use this sample [iris-fhir-template](https://openexchange.intersystems.com/package/iris-fhir-template) by @eshvarov. Indeed the Postman Collection was tested also with this sample.
+# Usage Notes
+
+You can use this sample against your own FHIR repository (and of course you'll need to refer to your own data/IDs), or if you'd like you can use this sample [iris-fhir-template](https://openexchange.intersystems.com/package/iris-fhir-template) by [@evshvarov](https://github.com/evshvarov). Indeed the Postman Collection was tested also with this sample.
 
 A couple of important things to note, if you are using [iris-fhir-template](https://openexchange.intersystems.com/package/iris-fhir-template):
 * Before using the Docker sample you must make a slight change in the repo you clone.
