@@ -180,7 +180,7 @@ So change it by you to this:
     <Default Name="InteractionsStrategy" Value="JsonAdvSQL" />
 ```
 
-(I will recommned to @eshvarov to update this as the default, and update here accordingly, but in the meantime you can use this)
+(I will recommned to @evshvarov to update this as the default, and update here accordingly, but in the meantime you can use this)
 
 And then when you want to start the Container, don't just 'docker compose up -d', rather the first time also build, so: 'docker compose up -d --build'.
 
