@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "2d97f03d-d001-4dc1-845c-711f59236da1",
+		"name": "FHIR Lists",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30056096"
+	},
+	"item": [
+		{
+			"name": "Create List ($current_allergies)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"resourceType\": \"List\",\r\n  \"status\":\"current\",\r\n  \"mode\":\"working\",\r\n  \"subject\":  { \"reference\":\"Patient/34\" },\r\n  \"entry\": [\r\n      {\r\n        \"item\": {\r\n           \"reference\": \"AllergyIntolerance/159\"\r\n        }\r\n      },\r\n      {\r\n        \"item\": {\r\n           \"reference\": \"AllergyIntolerance/160\"\r\n        }\r\n      },\r\n      {\r\n        \"item\": {\r\n           \"reference\": \"AllergyIntolerance/161\"\r\n        }\r\n      }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/List/$update-functional?for=34&name=\\$current-allergies",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"List",
+						"$update-functional"
+					],
+					"query": [
+						{
+							"key": "for",
+							"value": "34"
+						},
+						{
+							"key": "name",
+							"value": "\\$current-allergies"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"resourceType\": \"List\",\r\n  \"id\":\"OrgAPatients\",\r\n  \"status\":\"current\",\r\n  \"mode\":\"snapshot\",\r\n  \"entry\": [\r\n      {\r\n        \"item\": {\r\n           \"reference\": \"Patient/2\"\r\n        }\r\n      },\r\n      {\r\n        \"item\": {\r\n           \"reference\": \"Patient/3\"\r\n        }\r\n      },\r\n      {\r\n        \"item\": {\r\n           \"reference\": \"Patient/4\"\r\n        }\r\n      }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/List",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"List"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Current Allergies for Patient",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/AllergyIntolerance?patient=34&_list=\\$current-allergies",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"AllergyIntolerance"
+					],
+					"query": [
+						{
+							"key": "patient",
+							"value": "34"
+						},
+						{
+							"key": "_list",
+							"value": "\\$current-allergies"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sample (\"Org A\") Patients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/fhir+json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/Patient?_list=OrgAPatients",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"Patient"
+					],
+					"query": [
+						{
+							"key": "_list",
+							"value": "OrgAPatients"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "$find of Current Allergies List for Patient",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/List/$find?patient=34&name=\\$current-allergies",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"List",
+						"$find"
+					],
+					"query": [
+						{
+							"key": "patient",
+							"value": "34"
+						},
+						{
+							"key": "name",
+							"value": "\\$current-allergies"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Patients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/Patient",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Allergies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{endpoint}}/AllergyIntolerance",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{endpoint}}",
+					"path": [
+						"AllergyIntolerance"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "protocol",
+			"value": ""
+		},
+		{
+			"key": "host",
+			"value": ""
+		},
+		{
+			"key": "port",
+			"value": ""
+		},
+		{
+			"key": "endpoint",
+			"value": ""
+		}
+	]
+}
